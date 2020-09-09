@@ -1,0 +1,133 @@
+<html>
+  <head>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.dom.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.sound.min.js"></script>
+     <!--  <script src="quicksort2.js"></script> -->
+     <script >
+       let values = [];
+let loops;
+let swaps;
+let cycles = 1;
+let lines = false;
+let numLines = 10;
+let selType, inpNum;
+let button;
+let finished = false;
+
+let fr;
+function setup() {
+  selType = createSelect();
+  selType.position(10, 10);
+  selType.option('Bubble');
+  inpNum = createInput('10');
+  inpNum.position(10, 30);
+  inpNum.input(function () {
+    numLines = inpNum.value();
+    resetArray();
+  });
+
+  // button = createButton('Restart');
+  // button.position(20, 50);
+  // button.mousePressed(resetArray);
+ //    framer = createInput('1');
+  // framer.position(20, 70);
+  // framer.input(function () {
+  //  fr = framer.value();
+  // });
+createCanvas(1300, 600);
+  frameRate(2);
+
+fill(66, 245, 75);
+  resetArray();
+}
+
+function draw() {
+  background(0);
+  fill(145,230,175);
+   textFont('monospace');
+  textSize(25);
+  text("Mergesort", 15, 40);
+   fill(200);
+   textSize(15);
+
+  text("Made By:: Sachin Pratap,Sachin Singh, Rishikesh", windowWidth - 800, 40); 
+  if (!finished) {
+    switch (selType.value()) {
+      case 'Bubble':
+        bubbleSort();
+        break;
+    }
+  } else {fill(49, 214, 82);textSize(40);
+text('Sorting completed', 30, 100);
+    console.log("finished");
+    noLoop();
+  }
+
+  for (i = 0; i < values.length; i++) {
+    let location = map(i, 0, values.length, 0, width);
+     // switch (i) {
+     //   default:
+     //     stroke('blue');
+     //     
+     //     fill('green');
+     //     break;
+     // }
+     if(values[i]<values[i+1]){
+stroke('green');
+      strokeWeight(3);
+fill('red');
+    rect(location, height - values[i], width / numLines, height);
+     }else{
+      stroke('green');
+      strokeWeight(3);
+fill(23, 45, 156);
+    rect(location, height - values[i], width / numLines, height);}
+  }
+}
+
+swap = function (arr, a, b) {
+  let temp = arr[a];
+  arr[a] = arr[b];
+  arr[b] = temp;
+}
+resetArray = function () {
+  console.log('resetting')
+  values = [];
+  for (i = 0; i < numLines; i++) {
+    values[i] = random(height);
+  }
+  loops = 0;
+  swaps = 0;
+
+  finished = false;
+  loop();
+}
+bubbleSort = function () {
+  if (swaps < values.length - loops - 1) {
+    for (i = 0; i < cycles; i++) {
+      let a = values[swaps];
+      let b = values[swaps + 1];
+      if (a > b) {
+        swap(values, swaps, swaps + 1);
+      }
+      swaps++;
+    }
+  } else {
+    swaps = 0;
+    loops++;
+  }
+  if (loops == values.length) finished = true;
+}
+
+
+     </script>
+ 
+      </head>
+
+  <body>
+  	
+  </body>  
+ 
+</html>

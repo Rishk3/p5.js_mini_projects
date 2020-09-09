@@ -1,0 +1,109 @@
+<html>
+  <head>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.dom.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.sound.min.js"></script>
+     <!--  <script src="quicksort2.js"></script> -->
+    <script >
+   var colors = [];
+var array=[];
+var randomize;
+var next, previous, reset;
+
+var ii = 1, jj = 1, n = 16;
+
+function setup () {
+    for (i = 0; i <25; i++) {
+    array[i] =Math.floor(Math.random() * 60+1);
+  }
+
+  createCanvas(windowWidth, windowHeight - 40);
+  
+  for (var i = 0; i < n; i++) {
+    colors.push("#BBDEFB");
+  }
+
+  reset = createButton("Reset");
+  reset.mouseClicked(function(){
+    location.reload();
+  });
+
+}
+
+function draw () {
+  background(51);
+
+   fill(145,230,175);
+   textFont('monospace');
+  textSize(25);
+  text("Insertion Sort", 15, 60);
+   fill(100);
+   textSize(15);
+
+  text("Made by : Sachin,Rishikesh kumar,\nsachin singh", windowWidth - 270, 40);
+
+  noFill();
+  noStroke();
+
+  for (var i = 0; i < array.length; i++) {
+    if (i == ii) {
+      colors[i] = "#FF1744";
+    } else if (i == jj) {
+      colors[i] = "#388E3C";
+    } else {
+      colors[i] = "#BBDEFB";
+    }
+  }
+
+  printArrayBar(array);
+
+  if (ii == 16 && jj == 16) {
+    // textSize(32);
+    fill(250);
+    text("Array Sorted!", 15,  80);
+  }
+  nextStep();
+  frameRate(2);
+}
+
+
+
+function printArrayBar (array) {
+
+  for (var i = 0; i < array.length; i++) {
+    fill(colors[i]);
+    printBar( 20+i * 50, y = height - 50, array[i]);
+  }
+}
+
+function printBar (x, y, number) {
+
+  var ratio = number * 7;
+  rect(x, y - ratio, 30, ratio);
+  text(number, x + 5, y + 25);
+}
+
+function nextStep () {
+  if (ii < n) {
+    if (jj > 0 && array[jj - 1] > array[jj]) {
+      var temp = array[jj];
+      array[jj] = array[jj - 1];
+      array[jj - 1] = temp;
+
+      jj--;
+    } else {
+      ii++;
+      jj = ii;
+    }
+  }
+}
+
+    </script>
+      </head>
+
+  <body>
+  	
+  </body>  
+ 
+</html>
